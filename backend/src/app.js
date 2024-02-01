@@ -1,6 +1,7 @@
 // Load the express module to create a web application
 
 const express = require("express");
+const path = require("path");
 
 const app = express();
 
@@ -118,6 +119,15 @@ app.get("*", (req, res) => {
   res.sendFile(`${reactBuildPath}/index.html`);
 });
 */
+app.use("*", (req, res) => {
+  if (req.originalUrl.includes("assets")) {
+    res.sendFile(
+      path.resolve(__dirname, `../../frontend/dist/${req.originalUrl}`)
+    );
+  } else {
+    res.sendFile(path.resolve(__dirname, `../../frontend/dist/index.html`));
+  }
+});
 
 /* ************************************************************************* */
 

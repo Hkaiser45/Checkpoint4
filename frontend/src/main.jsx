@@ -7,6 +7,9 @@ import App from "./App";
 import Homepage from "./pages/Homepage";
 import Volunteer from "./pages/Volunteer";
 import Subscribe from "./pages/Subscribe";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import { UserProvider } from "./contexts/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
         path: "/famille",
         element: <Subscribe />,
       },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
     ],
   },
 ]);
@@ -31,7 +42,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <UserProvider>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </UserProvider>
 );

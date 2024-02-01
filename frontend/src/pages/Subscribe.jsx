@@ -5,14 +5,12 @@ function Subscribe() {
   const [practice, setPratice] = useState([]);
   const [choose, setChoose] = useState("");
   const [insertId, setInsertId] = useState(null);
-  const [succes, setSucces] = useState([
-    {
-      firstname: "",
-      lastname: "",
-      email: "",
-      practice: "",
-    },
-  ]);
+  const [succes, setSucces] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    practice: "",
+  });
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/practices`)
@@ -24,6 +22,7 @@ function Subscribe() {
     setChoose(e.target.value);
   };
   console.info(succes, choose, insertId);
+
   const handlePost = async () => {
     try {
       await axios
@@ -31,7 +30,7 @@ function Subscribe() {
           firstname: succes.firstname,
           lastname: succes.lastname,
           email: succes.email,
-          practice_id: succes.practice,
+          practice_id: succes.practice.id,
         })
         .then((response) => {
           const newInsertId = response.data.insertId;
@@ -43,9 +42,9 @@ function Subscribe() {
   };
 
   return (
-    <div>
+    <div className="family">
       <h1>Inscrivez votre trace sur terre</h1>
-      <form>
+      <form onSubmit={handlePost} className="form">
         <input
           id="firstname"
           type="text"
@@ -85,10 +84,10 @@ function Subscribe() {
               ))}
           </select>
         </label>
+        <button type="submit" onSubmit={handlePost}>
+          Rejoindre
+        </button>
       </form>
-      <button type="submit" onSubmit={handlePost}>
-        Rejoindre
-      </button>
     </div>
   );
 }

@@ -11,16 +11,18 @@ function Volunteer() {
   }, []);
 
   return (
-    <div>
-      {vol.map((el) => (
-        <li key={el.id}>
-          <p>
-            {el.firstname} {el.lastname}/{el.name}{" "}
-          </p>
-          <p>contacter:{el.email}</p>
-        </li>
-      ))}
-      ;
+    <div className="chosenOne">
+      <ul>
+        {vol.map((el) => (
+          <li key={el.id}>
+            <p className="name">
+              {el.firstname} {el.lastname}
+            </p>
+            /<span className="role">{el.name}</span>{" "}
+            <p>contacter: {el.email}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

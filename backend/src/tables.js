@@ -5,10 +5,12 @@
 // Import the manager modules responsible for handling data operations on the tables
 const VolunteerManager = require("./models/VolunteerManager");
 const PracticeManager = require("./models/PracticeManager");
+const UserManager = require("./models/UserManager");
 
 const managers = [
   VolunteerManager,
   PracticeManager,
+  UserManager,
   // Add other managers here
 ];
 

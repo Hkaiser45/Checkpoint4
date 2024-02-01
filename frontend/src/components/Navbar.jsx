@@ -3,21 +3,26 @@ import ghostIcon from "../assets/ghostpicture.jpg";
 
 function Navbar() {
   return (
-    <>
+    <div className="navbar">
       <div>
         <Link to="/">
           <img src={ghostIcon} alt="logo" className="logoHome" />
         </Link>
       </div>
-      <div>
+      <div className="option">
         <ul>
-          <li>connexion</li>
+          <Link to="/login">
+            <li>connexion</li>
+          </Link>
+          <Link to="/register">
+            <li>S'enregistrer</li>
+          </Link>
           <Link to="/volontaires">
-            <li>liste volontaires</li>
+            <li>Liste des volontaires</li>
           </Link>
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 

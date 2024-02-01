@@ -13,19 +13,6 @@ const browse = async (req, res, next) => {
 };
 
 // The R of BREAD - Read operation
-const read = async (req, res, next) => {
-  try {
-    const item = await tables.item.read(req.params.id);
-
-    if (item == null) {
-      res.sendStatus(404);
-    } else {
-      res.json(item);
-    }
-  } catch (err) {
-    next(err);
-  }
-};
 
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
@@ -49,7 +36,7 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
-  read,
+
   // edit,
   add,
   // destroy,
