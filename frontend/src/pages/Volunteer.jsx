@@ -1,14 +1,7 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
 
 function Volunteer() {
-  const [vol, setVol] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteersAdmin`)
-      .then((res) => setVol(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  const vol = useLoaderData().volunteer;
 
   return (
     <div className="chosenOne">

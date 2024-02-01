@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
 
 function Subscribe() {
-  const [practice, setPratice] = useState([]);
   const [choose, setChoose] = useState("");
   const [insertId, setInsertId] = useState(null);
   const [succes, setSucces] = useState({
@@ -12,18 +12,14 @@ function Subscribe() {
     practice: "",
   });
   const [vol, setVol] = useState([]);
+  const practice = useLoaderData().practices;
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteers`)
       .then((res) => setVol(res.data))
       .catch((err) => console.error(err));
   }, [insertId]);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/practices`)
-      .then((res) => setPratice(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+
   const handleChange = (e) => {
     setSucces({ ...succes, [e.target.name]: e.target.value });
     setChoose(e.target.value);
@@ -105,10 +101,9 @@ function Subscribe() {
           {vol.map((el) => (
             <li key={el.id}>
               <p className="identification">
-                {el.firstname} {el.lastname}
+                {el.firstname} {el.lastname}/
+                <span className="work">{el.name}</span> contacter: {el.email}
               </p>
-              /<span className="work">{el.name}</span>{" "}
-              <p>contacter: {el.email}</p>
             </li>
           ))}
         </ul>

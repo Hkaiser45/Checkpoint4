@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from "axios";
 
 import App from "./App";
 import Homepage from "./pages/Homepage";
@@ -22,10 +23,28 @@ const router = createBrowserRouter([
       {
         path: "/volontaires",
         element: <Volunteer />,
+        loader: () => {
+          return axios
+            .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteersAdmin`)
+            .then((res) => {
+              const volunteer = res.data;
+              return { volunteer };
+            })
+            .catch((err) => console.error(err));
+        },
       },
       {
         path: "/famille",
         element: <Subscribe />,
+        loader: () => {
+          return axios
+            .get(`${import.meta.env.VITE_BACKEND_URL}/api/practices`)
+            .then((res) => {
+              const practices = res.data;
+              return { practices };
+            })
+            .catch((err) => console.error(err));
+        },
       },
       {
         path: "/register",
