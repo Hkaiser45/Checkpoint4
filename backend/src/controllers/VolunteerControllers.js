@@ -12,6 +12,16 @@ const browse = async (req, res, next) => {
   }
 };
 
+const browseDesc = async (req, res, next) => {
+  try {
+    const volunteers = await tables.volunteer.readAllDesc();
+
+    res.json(volunteers);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 // The R of BREAD - Read operation
 
 // The E of BREAD - Edit (Update) operation
@@ -20,6 +30,7 @@ const browse = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   const volunteer = req.body;
+  console.info(volunteer);
 
   try {
     const insertId = await tables.volunteer.create(volunteer);
@@ -36,6 +47,7 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  browseDesc,
 
   // edit,
   add,

@@ -7,10 +7,15 @@ class volunteerManager extends AbstractManager {
 
   // The C of CRUD - Create operation
 
-  async create(volunteer, practiceId) {
+  async create(volunteer) {
     const [result] = await this.database.query(
       `insert into ${this.table} (firstname, lastname, email,practice_id) values (?,?,?,?)`,
-      [volunteer.firstname, volunteer.lastname, volunteer.email, practiceId]
+      [
+        volunteer.firstname,
+        volunteer.lastname,
+        volunteer.email,
+        volunteer.practice_id,
+      ]
     );
 
     return result.insertId;
@@ -32,6 +37,13 @@ class volunteerManager extends AbstractManager {
       `select volunteer.firstname, volunteer.lastname, volunteer.email, practice.name from ${this.table} join practice on practice_id=practice.id`
     );
 
+    return rows;
+  }
+
+  async readAllDesc() {
+    const [rows] = await this.database.query(
+      `select volunteer.firstname, volunteer.lastname, volunteer.email, practice.name from ${this.table} join practice on practice_id=practice.id order by volunteer.id desc`
+    );
     return rows;
   }
 

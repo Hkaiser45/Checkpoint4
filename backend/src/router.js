@@ -15,7 +15,8 @@ const VolunteerControllers = require("./controllers/VolunteerControllers");
 const PracticeControllers = require("./controllers/PracticeControllers");
 
 // Route to get a list of items
-router.get("/volunteers", VolunteerControllers.browse);
+router.get("/volunteersAdmin", VolunteerControllers.browse);
+router.get("/volunteers", VolunteerControllers.browseDesc);
 router.get("/practices", PracticeControllers.browse);
 
 // Route to get a specific item by ID

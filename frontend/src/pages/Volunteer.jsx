@@ -5,7 +5,7 @@ function Volunteer() {
   const [vol, setVol] = useState([]);
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteers`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteersAdmin`)
       .then((res) => setVol(res.data))
       .catch((err) => console.error(err));
   }, []);
