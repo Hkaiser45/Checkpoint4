@@ -3,7 +3,7 @@ const tables = require("../tables");
 
 const hashingOptions = {
   type: argon2.argon2id,
-  memoryCost: 19 * 2 ** 10 /* 19 Mio en kio (19 * 1024 kio) */,
+  memoryCost: 19 * 2 ** 10,
   timeCost: 2,
   parallelism: 1,
 };
@@ -11,16 +11,6 @@ const hashingOptions = {
 const hashPwd = async (req, res, next) => {
   try {
     const hash = await argon2.hash(req.body.password, hashingOptions);
-
-    /**
-     *
-     * Soit on créer un req.user en reprenant le body + mdp hashé.
-     *
-     * req.user = {...req.body, password: hash}
-     *
-     * soit on écrase la valeur avec le mdp hashé.
-     *
-     */
 
     req.body.password = hash;
 

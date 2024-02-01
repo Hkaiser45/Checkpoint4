@@ -37,6 +37,15 @@ class UserManager extends AbstractManager {
     return row;
   }
 
+  async readUserById(id) {
+    const [[row]] = await this.database.query(
+      `select * from ${this.table} where id = ? LIMIT 1`,
+      [id]
+    );
+
+    return row;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 

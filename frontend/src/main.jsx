@@ -11,6 +11,7 @@ import Subscribe from "./pages/Subscribe";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { UserProvider } from "./contexts/UserContext";
+import Init from "./services/Init";
 
 const router = createBrowserRouter([
   {
@@ -25,12 +26,16 @@ const router = createBrowserRouter([
         element: <Volunteer />,
         loader: () => {
           return axios
-            .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteersAdmin`)
+            .get(`${import.meta.env.VITE_BACKEND_URL}/api/volunteersAdmin`, {
+              withCredentials: true,
+            })
             .then((res) => {
               const volunteer = res.data;
               return { volunteer };
             })
-            .catch((err) => console.error(err));
+            .catch(() => {
+              window.location.href = "/login";
+            });
         },
       },
       {
@@ -63,6 +68,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserProvider>
+      <Init />
       <RouterProvider router={router} />
       <ToastContainer />
     </UserProvider>

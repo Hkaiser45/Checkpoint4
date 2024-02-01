@@ -12,10 +12,7 @@ function Navbar() {
       <div className="option">
         <ul>
           <Link to="/login">
-            <li>connexion</li>
-          </Link>
-          <Link to="/register">
-            <li>S'enregistrer</li>
+            <li>Admin</li>
           </Link>
           <Link to="/volontaires">
             <li>Liste des volontaires</li>

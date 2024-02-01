@@ -12,6 +12,7 @@ function Login() {
     email: "",
     password: "",
   });
+  console.info(login);
 
   const hChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -21,11 +22,17 @@ function Login() {
     e.preventDefault();
 
     instance
-      .post("/login", login)
+      .post("/login", login, { withCredentials: true })
       .then((res) => {
         console.info(res.data.user);
         setUser(res.data.user);
-        success("Vous êtes bien loggé");
+        success("Vous êtes bien loggé", {
+          onClose: () => {
+            setTimeout(() => {
+              window.location.href = "/volontaires";
+            }, 3000);
+          },
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -34,10 +41,10 @@ function Login() {
   };
 
   return (
-    <section>
+    <section className="login">
       <h1>Login</h1>
       <form onSubmit={hSubmit}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email :</label>
         <input
           type="email"
           id="email"
@@ -45,7 +52,7 @@ function Login() {
           onChange={hChange}
           value={login.email}
         />
-        <label htmlFor="password">Mot de passe</label>
+        <label htmlFor="password">Mot de passe :</label>
         <input
           type="password"
           id="password"
@@ -53,9 +60,11 @@ function Login() {
           onChange={hChange}
           value={login.password}
         />
-        <button type="submit">Send</button>
+        <button type="submit" className="connect">
+          Se connecter
+        </button>
       </form>
-      retourner a la Homepage <Link to="/">ici</Link>
+      <Link to="/">retour </Link>
     </section>
   );
 }

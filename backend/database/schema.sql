@@ -40,6 +40,6 @@ VALUES
 ;
 
 insert into volunteer(firstname,lastname,email,practice_id) VALUES
-('Mafty', 'Navue Erin', 'tureves@gmail.com', 3),('test','test','test@gmail.com',1)
+('Mafty', 'Navue Erin', 'paix@gmail.com', 3),('Helios','Kaiser','King@gmail.com',1)
 
 insert into user(username, email, password) VALUES('Helios','deicide@gmail.com', 'Deicide33$')

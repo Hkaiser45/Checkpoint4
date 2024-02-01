@@ -105,7 +105,6 @@ body {
 }
 .chosenOne {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   min-height: 86vh;
   .name {
@@ -114,5 +113,27 @@ body {
   .role {
     font-style: italic;
     font-family: Arial, Helvetica, sans-serif;
+  }
+  .practiceAdd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem;
+    flex-direction: center;
+  }
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 86vh;
+  gap: 4rem;
+  h1 {
+    font-style: italic;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
   }
 }
