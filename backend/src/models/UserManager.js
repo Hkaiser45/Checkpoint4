@@ -1,36 +1,23 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
+class UserManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "item" as configuration
-    super({ table: "item" });
+    super({ table: "user" });
   }
 
   // The C of CRUD - Create operation
 
-  async create(item) {
+  async create(user) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (title) values (?)`,
-      [item.title]
+      `insert into ${this.table} (username, email, password) values (?, ?, ?)`,
+      [user.username, user.email, user.password]
     );
 
     // Return the ID of the newly inserted item
     return result.insertId;
-  }
-
-  // The Rs of CRUD - Read operations
-
-  async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
-    const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
-      [id]
-    );
-
-    // Return the first row of the result, which represents the item
-    return rows[0];
   }
 
   async readAll() {
@@ -39,6 +26,24 @@ class ItemManager extends AbstractManager {
 
     // Return the array of items
     return rows;
+  }
+
+  async readUserByEmail(email) {
+    const [[row]] = await this.database.query(
+      `select * from ${this.table} where email = ? LIMIT 1`,
+      [email]
+    );
+
+    return row;
+  }
+
+  async readUserById(id) {
+    const [[row]] = await this.database.query(
+      `select * from ${this.table} where id = ? LIMIT 1`,
+      [id]
+    );
+
+    return row;
   }
 
   // The U of CRUD - Update operation
@@ -56,4 +61,4 @@ class ItemManager extends AbstractManager {
   // }
 }
 
-module.exports = ItemManager;
+module.exports = UserManager;
